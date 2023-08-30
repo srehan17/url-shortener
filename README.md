@@ -24,3 +24,6 @@ To get it up and running:
 > Create .env file in the root folder and add the MONGO_URI environment variable following the steps in MongoDB Atlas.
 
 > Run server: node server.js
+
+
+<img width="1035" alt="Screen Shot 2023-08-30 at 12 07 18 AM" src="https://github.com/srehan17/url-shortener/assets/28539842/d9a2e245-8ca9-422b-ab1c-d47a0342ccd8">
