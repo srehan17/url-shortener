@@ -2,9 +2,9 @@
 
 What the application does:
 
-> Users can submit a full length URL to generate a short numeric URL.
+> Users can submit a full length URL in a textbox to generate a short numeric URL.
 
-> Users can see a list of original urls and short url.
+> Users can see a list of Urls (Original url, Short url, Delete Button).
 
 > Users can delete a url from the list.
 
