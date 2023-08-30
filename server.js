@@ -1,8 +1,20 @@
 const express = require('express')
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 const cors = require('cors')
 const app = express()
 const dotenv = require('dotenv')
 dotenv.config()
+
+app.use(cookieParser('NotSoSecret'));
+app.use(session({
+  secret : 'something',
+  cookie: { maxAge: 60000 },
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -33,27 +45,33 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
   UrlModel.find().then((urls) => {
-    res.render('index', { urls })
+    const message = req.flash('msg')
+    res.render('index', { urls, message })
   })
 })
 
 app.get('/shorturl', async (req, res) => {
   const urls = await UrlModel.find()
-  res.render('index', { urls: urls })
+  const message = req.flash('msg');
+  res.render('index', { urls: urls, message })
 })
 
 app.post('/shorturl', (req, res) => {
   const original_url = req.body.urlInput
   if (!isValidUrl(original_url)) {
-    res.json({
-      error: 'invalid url'
-    })
+    // res.json({
+    //   error: 'invalid url'
+    // })
+    req.flash('msg', "Invalid Url! Please enter a url with valid protocol.");
+    res.redirect('/')
   }
   else {
     try {
       UrlModel.findOne({ original_url }).then((result) => {
         if (result !== null) {
           // res.json(result)
+          req.flash('msg', "Url already exists!");
+          res.redirect('/')
         }
         else {
           const short_url = ID.generate(new Date().toJSON())
@@ -63,8 +81,9 @@ app.post('/shorturl', (req, res) => {
           })
           newUrl.save()
           // res.json(newUrl)
+          req.flash('msg', "Url added successfully!");
+          res.redirect('/')
         }
-        res.redirect('/')
       })
     }
     catch (err) {
@@ -93,14 +112,14 @@ app.post('/delete/:id', async (req, res) => {
   try {
     const url = await UrlModel.deleteOne({_id: req.params.id})
     if (!url){
-      res.status(400).json('Url not found')
+      return res.status(400).json('Url not found')
     }
-    return res.redirect('/')
+    req.flash('msg', "Url deleted successfully!");
+    res.redirect('/')
   }
   catch (err) {
-      res.status(500).json('Server error')
+    res.status(500).json('Server error')
   }})
-
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`)
