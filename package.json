@@ -1,0 +1,37 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "url shortener",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srehan17/url-shortener.git"
+  },
+  "keywords": [
+    "url",
+    "shorturl"
+  ],
+  "author": "srehan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/srehan17/url-shortener/issues"
+  },
+  "homepage": "https://github.com/srehan17/url-shortener#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongodb": "^6.0.0",
+    "mongoose": "^7.4.5",
+    "nodejs-unique-numeric-id-generator": "^1.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
