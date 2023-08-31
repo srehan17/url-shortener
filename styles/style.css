@@ -28,10 +28,6 @@ form {
     gap: 10px
 }
 
-table {
-    text-align: left;
-}
-
 .sr-only {
     position: absolute;
     left: -10000px;
