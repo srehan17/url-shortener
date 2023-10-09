@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "url shortener",
   "main": "server.js",
-  "homepage": "https://srehan17.github.io/url-shortener",
+  "homepage": "https://github.com/srehan17/url-shortener#readme",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -23,7 +23,6 @@
   "bugs": {
     "url": "https://github.com/srehan17/url-shortener/issues"
   },
-  "homepage": "https://github.com/srehan17/url-shortener#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
     "connect-flash": "^0.1.1",
@@ -39,7 +38,7 @@
     "nodejs-unique-numeric-id-generator": "^1.1.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "gh-pages": "^6.0.0"
+    "gh-pages": "^6.0.0",
+    "nodemon": "^3.0.1"
   }
 }

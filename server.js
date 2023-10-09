@@ -24,7 +24,7 @@ const ID = require("nodejs-unique-numeric-id-generator")
 
 const UrlModel = require('./models/Url')
   
-const port = process.env.PORT || 3000
+const port = 3000
 
 app.use(cors())
 
@@ -44,10 +44,15 @@ app.use(express.static('styles'))
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-  UrlModel.find().then((urls) => {
-    const message = req.flash('msg')
-    res.render('index', { urls, message })
-  })
+  try {
+    UrlModel.find().then((urls) => {
+      const message = req.flash('msg')
+      res.render('index', { urls, message })
+    })
+  }
+  catch(err) {
+    console.error("Error: ", error)
+  }
 })
 
 app.get('/shorturl', async (req, res) => {
