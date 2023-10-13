@@ -43,25 +43,27 @@ app.use(express.static('styles'))
 
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   try {
-    UrlModel.find().then((urls) => {
+    const urls = await UrlModel.find({})
+    if (urls) {
       const message = req.flash('msg')
-      res.render('index', { urls, message })
-    })
+      res.status(200).render('index', { urls, message })
+    }
+    else {
+      console.log("No urls found")
+      res.status(404)
+    }
+    
   }
   catch(err) {
-    console.error("Error: ", error)
+    console.error("Error: ", err)
+    res.status(500).json('Server Error')
+    // .send(err)
   }
 })
 
-app.get('/shorturl', async (req, res) => {
-  const urls = await UrlModel.find()
-  const message = req.flash('msg');
-  res.render('index', { urls: urls, message })
-})
-
-app.post('/shorturl', (req, res) => {
+app.post('/', (req, res) => {
   const original_url = req.body.urlInput
   if (!isValidUrl(original_url)) {
     // res.json({
@@ -97,7 +99,7 @@ app.post('/shorturl', (req, res) => {
   }
 })
 
-app.get('/shorturl/:short_url', (req, res) => {
+app.get('/:short_url', (req, res) => {
   try {
     UrlModel.findOne({
       short_url: req.params['short_url']

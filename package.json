@@ -7,8 +7,9 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha",
+    "test-with-coverage": "nyc --reporter=text mocha"
   },
   "repository": {
     "type": "git",
@@ -35,10 +36,14 @@
     "express-session": "^1.17.3",
     "mongodb": "^6.0.0",
     "mongoose": "^7.4.5",
-    "nodejs-unique-numeric-id-generator": "^1.1.0"
+    "nodejs-unique-numeric-id-generator": "^1.1.0",
+    "nyc": "^15.1.0"
   },
   "devDependencies": {
+    "@types/chai-http": "^4.2.0",
+    "chai": "^4.3.10",
     "gh-pages": "^6.0.0",
+    "mocha": "^10.2.0",
     "nodemon": "^3.0.1"
   }
 }
