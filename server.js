@@ -28,16 +28,7 @@ const port = 3000
 
 app.use(cors())
 
-const isValidUrl = (url) => {
-  try {
-    const testingUrl = new URL(url)
-    return testingUrl.protocol === 'http:' || testingUrl.protocol === 'https:'
-  }
-  catch (err) {
-    console.error(err)
-    return false
-  }
-}
+const isValidUrl = require('./isValidUrl')
 
 app.use(express.static('styles'))
 
@@ -59,16 +50,12 @@ app.get('/', async (req, res) => {
   catch(err) {
     console.error("Error: ", err)
     res.status(500).json('Server Error')
-    // .send(err)
   }
 })
 
 app.post('/', (req, res) => {
   const original_url = req.body.urlInput
   if (!isValidUrl(original_url)) {
-    // res.json({
-    //   error: 'invalid url'
-    // })
     req.flash('msg', "Invalid Url! Please enter a url with valid protocol.");
     res.redirect('/')
   }
@@ -131,3 +118,5 @@ app.post('/delete/:id', async (req, res) => {
 app.listen(port, function() {
   console.log(`Listening on port ${port}`)
 })
+
+module.exports = app
