@@ -36,7 +36,7 @@
                     <td align="left"><a href="<%= url.original_url %>" target="_blank"><%= url.original_url %></a></td>
                     <td align="center"><a href="<%= url.short_url %>" target="_blank"><%= url.short_url %></a></td>
                     <td align="center"><form method="POST" action="/delete/<%= url.id %>">
-                    <button type="submit" id="deleteButton">Delete</button></form></td>
+                        <button type="submit" id="deleteButton">Delete</button></form></td>
                 </tr>
                 <% }) %>
             </tbody>

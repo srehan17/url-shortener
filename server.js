@@ -42,14 +42,12 @@ app.get('/', async (req, res) => {
       res.status(200).render('index', { urls, message })
     }
     else {
-      console.log("No urls found")
-      res.status(404)
+      res.status(404).json("No urls found")
     }
     
   }
   catch(err) {
-    console.error("Error: ", err)
-    res.status(500).json('Server Error')
+    res.status(500).json('Server error')
   }
 })
 
@@ -74,14 +72,13 @@ app.post('/', (req, res) => {
             short_url,
           })
           newUrl.save()
-          // res.json(newUrl)
           req.flash('msg', "Url added successfully!");
           res.redirect('/')
         }
       })
     }
     catch (err) {
-      console.error(err)
+      res.status(500).json('Server error')
     }
   }
 })
@@ -103,6 +100,7 @@ app.get('/:short_url', (req, res) => {
 })
 
 app.post('/delete/:id', async (req, res) => {
+// app.delete('/:id', async (req, res) => {
   try {
     const url = await UrlModel.deleteOne({_id: req.params.id})
     if (!url){

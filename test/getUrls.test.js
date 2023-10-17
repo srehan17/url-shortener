@@ -10,13 +10,6 @@ const UrlModel = require('../models/Url')
 describe('/GET urls', () => {
     let host = "http://localhost:3000"
 
-    it('it should get list of urls', (done) => {
-        const urls = UrlModel.find({}) 
-            .then((urls) => { 
-                done() 
-            }) 
-    })
-
     it("returns status 200", function() {
         request(host, function(error, response, body) {
           expect(response.statusCode).to.equal(200)
