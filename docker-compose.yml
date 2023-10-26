@@ -12,7 +12,5 @@ services:
   mongo:
     container_name: mongo
     image: mongo
-    environment:
-      - ME_CONFIG_MONGODB_URL: ${{ secrets.MONGO_URI }}
     ports:
       - '27017:27017'
